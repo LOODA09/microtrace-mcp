@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Interactive Function Graph — D3 + TypeScript</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/functionGraph.css" />
+    <link rel="stylesheet" href="../css/panels.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/asmViewer.css" />
+    <link rel="stylesheet" href="../css/sidebar.css" />
+    <link rel="stylesheet" href="../css/tooltip.css" />
+    <link
+      rel="stylesheet"
+      href="../../node_modules/highlight.js/styles/vs2015.css"
+    />
+  </head>
+  <body data-light-theme="false">
+    <!-- Sidebar Navigation (Preserved) -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html">
+          <img
+            src="../assets/pictures/MicroTrace_Logo.png"
+            alt="MicroTrace Logo"
+            class="logo"
+          />
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="../index.html" class="nav-link" title="Home"
+              ><span class="icon">🏠</span></a
+            >
+          </li>
+          <li>
+            <a href="upload.html" class="nav-link" title="Projects"
+              ><span class="icon">📂</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="functionGraph.html"
+              class="nav-link active"
+              title="Functions Graph"
+              ><span class="icon">🔬</span></a
+            >
+          </li>
+          <li>
+            <a href="dashboard.html" class="nav-link" title="Dashboard"
+              ><span class="icon">📊</span></a
+            >
+          </li>
+          <li>
+            <a href="mcp.html" class="nav-link" title="MCP"
+              ><span class="icon">🤖</span></a
+            >
+          </li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="about.html" class="nav-link" title="About"
+          ><span class="icon">ℹ️</span></a
+        >
+        <button id="themeSwitch" class="theme-toggle" title="Toggle Theme">
+          <span class="icon-sun">☀️</span><span class="icon-moon">🌙</span>
+        </button>
+        <a id="settingsBtn" href="settings.html" title="Settings">⚙️</a>
+      </div>
+    </aside>
+    <div id="app-container">
+      <!-- Left Drawer Column (Functions + AI) -->
+      <div id="left-drawer-column">
+        <div
+          id="function-list-drawer"
+          class="drawer-panel"
+          style="display: flex"
+        >
+          <div class="drawer-header">
+            <span>Functions</span>
+            <button
+              id="close-functions-btn"
+              class="ai-icon-btn"
+              title="Close Panel"
+            >
+              ✕
+            </button>
+          </div>
+          <div id="function-list-content" class="drawer-content">
+            <!-- JS Populated -->
+          </div>
+        </div>
+
+        <div id="drawer-splitter" class="drawer-splitter"></div>
+
+        <div id="ai-drawer" class="drawer-panel" style="display: flex">
+          <div class="drawer-header">
+            <span>AI Assistant</span>
+            <div class="ai-actions">
+              <button id="ai-new-chat-btn" class="ai-icon-btn" title="New Chat">
+                +
+              </button>
+              <button
+                id="ai-past-chats-btn"
+                class="ai-icon-btn"
+                title="History"
+                data-tooltip="History"
+              >
+                🕒
+              </button>
+              <button
+                id="ai-options-btn"
+                class="ai-icon-btn"
+                title="More Options"
+              >
+                ⋮
+              </button>
+              <button
+                id="ai-open-window-btn"
+                class="ai-icon-btn"
+                title="Open Window"
+              >
+                ↗
+              </button>
+              <button id="close-ai-btn" class="ai-icon-btn" title="Close Panel">
+                ✕
+              </button>
+            </div>
+          </div>
+          <div id="ai-chat-content" class="drawer-content">
+            <div
+              style="
+                padding: 10px;
+                color: #aaa;
+                text-align: center;
+                font-size: 12px;
+              "
+            >
+              AI Assistant Ready
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="vertical-splitter"
+        class="vertical-splitter"
+        title="Drag to resize"
+      ></div>
+
+      <!-- Main Column -->
+      <div id="main-column">
+        <!-- Global Top Bar -->
+        <div id="global-top-bar" class="global-top-bar">
+          <div class="navigation-group">
+            <button id="history-back-btn" class="history-btn" title="Go Back">
+              ←
+            </button>
+            <button id="history-fwd-btn" class="history-btn" title="Go Forward">
+              →
+            </button>
+          </div>
+
+          <div class="breadcrumb-container">
+            <span id="current-function-breadcrumb" class="breadcrumb"
+              >Select a function</span
+            >
+          </div>
+
+          <div class="view-toggles">
+            <button
+              class="tab-btn active"
+              data-tab="functions"
+              data-tooltip="Toggle Functions List"
+            >
+              Functions
+            </button>
+            <button
+              class="tab-btn active"
+              data-tab="assembly"
+              data-tooltip="Toggle Assembly Panel"
+            >
+              Assembly
+            </button>
+            <button
+              class="tab-btn active"
+              data-tab="code"
+              data-tooltip="Toggle Code Panel"
+            >
+              Code
+            </button>
+            <button
+              class="tab-btn active"
+              data-tab="graph"
+              data-tooltip="Toggle Graph Panel"
+            >
+              Graph
+            </button>
+            <button
+              id="reset-layout-btn"
+              class="reset-btn"
+              title="Reset Layout"
+              data-tooltip="Reset layout to default"
+            >
+              ⟲
+            </button>
+          </div>
+        </div>
+
+        <!-- Dockview Root -->
+        <div id="dockview-root"></div>
+      </div>
+    </div>
+
+    <!-- Load compiled JS -->
+    <script type="module" src="../../dist/index.js"></script>
+    <script type="module" src="../../dist/functionGraph.js"></script>
+  </body>
+</html>

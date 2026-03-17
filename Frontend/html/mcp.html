@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroTrace MCP Client</title>
+    <link rel="stylesheet" href="../css/mcp.css" />
+    <link rel="stylesheet" href="../css/mcpanimation.css" />
+  </head>
+  <body data-light-theme="false" data-theme="dark">
+    <!-- Sidebar Navigation (60px icon only) -->
+    <aside class="sidebar-nav-main">
+      <div class="sidebar-nav-header">
+        <a href="../index.html">
+          <img src="../assets/pictures/MicroTrace_Logo.png" alt="MicroTrace Logo" class="logo" />
+        </a>
+      </div>
+      <nav class="sidebar-nav-links">
+        <a href="../index.html" title="Home">🏠</a>
+        <a href="upload.html" title="Projects">📂</a>
+        <a href="functionGraph.html" title="Functions Graph">🔬</a>
+        <a href="dashboard.html" title="Dashboard">📊</a>
+        <a href="mcp.html" class="active" title="MCP">🤖</a>
+      </nav>
+      <div class="sidebar-nav-footer">
+        <a href="about.html" title="About">ℹ️</a>
+        <button id="themeSwitch" class="theme-toggle" title="Toggle Theme">
+          <span class="icon-sun">☀️</span>
+          <span class="icon-moon">🌙</span>
+        </button>
+        <button class="icon-button" id="togglePanelBtn" title="Tools">🔧</button>
+        <a href="settings.html" title="Settings">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+          </svg>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Chat History Sidebar (Right of Navigation) -->
+    <aside class="chat-sidebar" id="chatSidebar">
+      <div class="sidebar-header">
+        <button class="new-chat-btn" id="newChatBtn">
+          <span style="font-size: 1.1rem;">+</span>
+          <span>New Chat</span>
+        </button>
+        <div class="connection-status disconnected" id="connectionStatus">
+          <span class="status-dot"></span>
+          <span id="statusText">Disconnected</span>
+        </div>
+      </div>
+      <div class="chat-history" id="chatHistory"></div>
+      <div class="sidebar-footer">
+        <div class="api-status" id="apiStatus">API: Not connected</div>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="chat-container" id="chatContainer">
+      <div class="chat-header">
+        <div class="header-left">
+          <button class="toggle-sidebar-btn" id="toggleSidebarBtn">☰</button>
+          <div class="header-actions">
+            <button class="icon-button" id="exportChatBtn" title="Export">📥</button>
+            <button class="icon-button" id="connectBtn" title="Connect to MCP Server">🔌</button>
+            <button class="icon-button" id="clearChatBtn" title="Clear Chat">🗑️</button>
+          </div>
+        </div>
+        <!-- MicroTrace AI with RGB animation - centered -->
+        <div class="header-brand">
+          <span class="header-brand-text">MicroTrace AI</span>
+        </div>
+        <div class="header-right">
+          <!-- Profile Bubble with Dropdown - dropdown is SIBLING, not child -->
+          <div class="header-profile">
+            <div class="profile-bubble" id="profileBubble" title="Profile">
+              <span id="profileInitials">U</span>
+            </div>
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-header">
+                <div class="profile-dropdown-name" id="profileName">User</div>
+                <div class="profile-dropdown-email" id="profileEmail">user@example.com</div>
+              </div>
+              <div class="profile-dropdown-menu">
+                <div class="profile-dropdown-item" id="editProfileBtn">
+                  <span>👤</span>
+                  <span>Edit Profile</span>
+                </div>
+                <div class="profile-dropdown-item danger" id="logoutBtn">
+                  <span>🚪</span>
+                  <span>Logout</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="messages-container" id="messagesContainer">
+        <div class="messages-wrapper" id="messagesWrapper">
+          <div class="welcome-screen" id="welcomeScreen">
+            <div class="robot-container">
+              <div class="robot-head">
+                <div class="antenna"></div>
+                <div class="robot-eyes">
+                  <div class="eye"></div>
+                  <div class="eye"></div>
+                </div>
+                <div class="robot-mouth">
+                  <div class="mouth-line"></div>
+                  <div class="mouth-line"></div>
+                  <div class="mouth-line"></div>
+                </div>
+              </div>
+              <div class="logo-text">MicroTrace AI</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="typing-indicator" id="typingIndicator">
+        <div class="message-avatar">AI</div>
+        <div class="typing-dots">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      </div>
+
+      <div class="input-section">
+        <div class="input-wrapper">
+          <input type="file" id="fileInput" accept=".pdf,.txt,.doc,.docx" multiple>
+          <button class="file-upload-btn" id="fileUploadBtn" title="Upload files">📎</button>
+          <textarea id="messageInput" placeholder="Ask about STM32 registers..." rows="1" maxlength="4000"></textarea>
+          <button class="deep-search-button" id="deepSearchButton" title="Deep Search" disabled></button>
+          <button class="send-button" id="sendButton" disabled>➤</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Quick Tools Panel -->
+    <div class="quick-tools-panel" id="quickToolsPanel">
+      <div class="panel-header">
+        <h2 class="panel-title">Quick Tools</h2>
+        <button class="toggle-panel-btn" id="togglePanelBtn">☰</button>
+      </div>
+      <div class="panel-tools-container">
+        <div class="panel-tools-grid">
+          <button class="panel-tool-btn" id="extractRegisterBtn" data-tool="extract">
+            <span class="panel-tool-icon">📄</span>
+            <span class="panel-tool-name">Extract Registers</span>
+          </button>
+          <button class="panel-tool-btn" id="searchRegisterBtn" data-tool="search">
+            <span class="panel-tool-icon">🔍</span>
+            <span class="panel-tool-name">Search Register</span>
+          </button>
+          <button class="panel-tool-btn" id="getRegisterBtn" data-tool="get">
+            <span class="panel-tool-icon">📋</span>
+            <span class="panel-tool-name">Get Register</span>
+          </button>
+          <button class="panel-tool-btn" id="extractImagesBtn" data-tool="images">
+            <span class="panel-tool-icon">🖼️</span>
+            <span class="panel-tool-name">Extract Images</span>
+          </button>
+          <button class="panel-tool-btn" id="getPdfTitlesBtn" data-tool="titles">
+            <span class="panel-tool-icon">📖</span>
+            <span class="panel-tool-name">PDF Titles</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Context Menu -->
+    <div class="context-menu" id="contextMenu">
+      <button class="context-menu-item" id="copyTextBtn">📋 Copy</button>
+      <button class="context-menu-item" id="askChatBtn">💬 Ask Chat</button>
+    </div>
+
+    <footer class="foot">
+      <div class="footerContent">
+        <div class="socialsContainer">
+          <a data-social="YouTube" style="--accent-color: red" href="https://youtube.com/@ViralVibe1" target="_blank">
+            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <title>YouTube</title>
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </a>
+          <a data-social="Codeforces" style="--accent-color: #738adb" href="https://codeforces.com/profile/Omar_The_Legend" target="_blank">
+            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <title>Codeforces</title>
+              <path d="M4.5 7.5A1.5 1.5 0 0 1 6 9v10.5A1.5 1.5 0 0 1 4.5 21h-3C.673 21 0 20.328 0 19.5V9c0-.828.673-1.5 1.5-1.5h3zm9-4.5A1.5 1.5 0 0 1 15 4.5v15a1.5 1.5 0 0 1-1.5 1.5h-3c-.827 0-1.5-.672-1.5-1.5v-15c0-.828.673-1.5 1.5-1.5h3zm9 7.5A1.5 1.5 0 0 1 24 12v7.5a1.5 1.5 0 0 1-1.5 1.5h-3a1.5 1.5 0 0 1-1.5-1.5V12a1.5 1.5 0 0 1 1.5-1.5h3z"/>
+            </svg>
+          </a>
+          <a data-social="GitHub" style="--accent-color: black" href="https://github.com/omarsawaf1" target="_blank">
+            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <title>GitHub</title>
+              <path d="12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+          </a>
+          <a data-social="LinkedIn" style="--accent-color: #0072b1" href="https://www.linkedin.com/in/omar-mohamed-hatem-057a8025b/" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 50 50">
+              <title>LinkedIn</title>
+              <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z"></path>
+            </svg>
+          </a>
+        </div>
+        <p>© 2025 Omar Mohamed Hatem. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Load compiled JS -->
+    <script type="module" src="../../dist/index.js"></script>
+    <script type="module" src="../../dist/mcp.js"></script>
+    <script type="module" src="../../dist/mcpconnector.js"></script>
+  </body>
+</html>

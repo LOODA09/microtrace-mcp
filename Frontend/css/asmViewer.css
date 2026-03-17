@@ -1,0 +1,51 @@
+/* Assembly Viewer Styles */
+
+.asm-listing {
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  background-color: var(--panel-bg);
+  color: var(--text-color);
+  overflow-y: auto;
+  height: 100%;
+}
+
+.asm-line {
+  display: flex;
+  padding: 2px 8px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background-color 0.15s ease, border-left-color 0.15s ease;
+}
+
+.asm-line:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+body[data-light-theme="true"] .asm-line:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.asm-line.highlighted {
+  background-color: rgba(0, 127, 212, 0.2);
+  border-left-color: var(--accent-color);
+}
+
+body[data-light-theme="true"] .asm-line.highlighted {
+  background-color: rgba(0, 127, 212, 0.15);
+}
+
+.line-num {
+  min-width: 50px;
+  color: var(--text-muted);
+  user-select: none;
+  text-align: right;
+  margin-right: 16px;
+  font-weight: 500;
+}
+
+.line-content {
+  flex: 1;
+  white-space: pre;
+  font-family: inherit;
+}

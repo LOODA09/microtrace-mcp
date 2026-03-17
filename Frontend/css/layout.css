@@ -1,0 +1,517 @@
+@import "dockview-core/dist/styles/dockview.css";
+/* Layout CSS */
+
+/* #app-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+} */
+#app-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: calc(100vw - 60px);
+  overflow: hidden;
+  margin-left: 60px;
+}
+
+/* Sidebar (Leftmost) - handled by sidebar.css but ensuring it fits */
+.sidebar {
+  width: 60px; /* Fixed width */
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+/* Drawer Column */
+#left-drawer-column {
+  width: 250px; /* Initial width */
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color);
+  background-color: var(--panel-bg);
+  flex-shrink: 0;
+  position: relative;
+  transition: width 0.2s; /* Smoother collapse if we implement column collapse */
+}
+
+.drawer-panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--card-bg);
+}
+
+.drawer-header {
+  background-color: var(--title-bg);
+  color: var(--primary-color);
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 25px; /* Fixed header height */
+  flex-shrink: 0;
+}
+
+.drawer-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.vertical-splitter {
+  width: 5px;
+  background-color: var(--border-color);
+  cursor: col-resize;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.vertical-splitter:hover {
+  background-color: var(--accent-1);
+}
+
+.drawer-splitter {
+  height: 5px;
+  background-color: var(--border-color);
+  cursor: row-resize;
+  flex-shrink: 0;
+}
+
+.drawer-splitter:hover {
+  background-color: var(--accent-1);
+}
+
+/* Main Column */
+#main-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Top Tab Bar */
+#top-tab-bar {
+  height: 35px;
+  background-color: var(--panel-bg);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-bottom: 1px solid var(--border-color);
+  gap: 5px;
+}
+
+/* Unified Tab Button Styles */
+.tab-btn,
+.top-tab {
+  padding: 5px 15px;
+  background-color: var(--hover-bg-color);
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid transparent; /* default border */
+  border-radius: 3px;
+  user-select: none;
+}
+
+.tab-btn:hover,
+.top-tab:hover {
+  background-color: var(--hover-bg-color);
+  color: var(--primary-color);
+}
+
+.tab-btn.active,
+.top-tab.active {
+  background-color: var(--accent-1); /* Active Blue */
+  color: #fff;
+  border-color: var(--accent-1);
+}
+
+/* History Navigation logic in Top Bar or somewhere? */
+/* Assuming they are icons in top bar */
+.history-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  padding: 2px 5px;
+  font-size: 16px;
+}
+
+.history-btn:disabled {
+  color: #555;
+  cursor: default;
+}
+
+/* Dockview Root */
+#dockview-root {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+/* DOCKVIEW THEME OVERRIDES */
+/* Map standard Dockview variables to our theme variables */
+.dv-content {
+  background-color: var(--panel-bg);
+  color: var(--primary-color);
+}
+
+.dv-header {
+  background-color: var(--title-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dv-tab {
+  background-color: var(--panel-bg);
+  color: var(--text-muted);
+  border-right: 1px solid var(--border-color);
+}
+
+.dv-tab.dv-active-tab {
+  background-color: var(--card-bg);
+  color: var(--accent-1);
+  border-top: 2px solid var(--accent-1); /* Top highlight like VSCode */
+}
+
+.dv-sash {
+  background-color: transparent; /* Invisible grab area */
+}
+
+.dv-sash:hover,
+.dv-sash.dv-active {
+  background-color: var(--accent-1); /* Highlight on hover */
+}
+
+/* Remove old GoldenLayout overrides if any remain below... */
+
+/* AI Drawer specifics */
+.ai-actions {
+  display: flex;
+  gap: 5px;
+}
+.ai-icon-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0 2px;
+}
+.ai-icon-btn:hover {
+  color: #007acc;
+}
+
+/* New VSCode Style Layout */
+#main-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--panel-bg);
+}
+
+.global-top-bar {
+  height: 35px;
+  background-color: var(--panel-bg); /* VSCode generic top bar color */
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-bottom: 1px solid var(--border-color);
+  box-sizing: border-box;
+  gap: 15px;
+  flex-shrink: 0;
+}
+
+.navigation-group {
+  display: flex;
+  gap: 5px;
+}
+
+.breadcrumb-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.breadcrumb {
+  font-size: 13px;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.controls-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.separator-vertical {
+  width: 1px;
+  height: 16px;
+  background-color: #555;
+}
+
+/* Adjust inputs to look native to the bar */
+.global-top-bar input {
+  background: #3c3c3c;
+  border: 1px solid #3c3c3c;
+  color: #ccc;
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
+.global-top-bar input:focus {
+  outline: 1px solid #007acc;
+  border-color: #007acc;
+}
+
+.global-top-bar button:hover {
+  background-color: #444;
+}
+
+/* Function List Styles */
+.function-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.function-item {
+  padding: 5px 10px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: background-color 0.2s;
+}
+
+.function-item:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.function-item.selected {
+  background-color: var(--accent-1);
+  color: #fff;
+}
+
+/* AI Icons */
+.ai-icon-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted); /* Changed from #fff to var */
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0 2px;
+}
+.ai-icon-btn:hover {
+  color: var(--accent-1);
+}
+
+/* Specific Panel content text colors */
+#asm-panel-content,
+#code-panel-content {
+  color: var(--primary-color);
+  background-color: var(--card-bg);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: monospace;
+}
+
+/* ==================== LIGHT THEME DOCKVIEW OVERRIDES ==================== */
+body[data-light-theme="true"] .dv-header {
+  background-color: #f3f3f3;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+body[data-light-theme="true"] .dv-tab {
+  background-color: #ececec !important;
+  color: #333333 !important;
+  border-right: 1px solid #e5e5e5 !important;
+}
+
+body[data-light-theme="true"] .dv-tab:hover {
+  background-color: #e0e0e0;
+}
+
+body[data-light-theme="true"] .dv-tab.dv-active-tab {
+  background-color: #ffffff;
+  color: var(--accent-1);
+  border-top: 2px solid var(--accent-1);
+}
+
+body[data-light-theme="true"] .dv-content {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+body[data-light-theme="true"] .dv-sash:hover,
+body[data-light-theme="true"] .dv-sash.dv-active {
+  background-color: var(--accent-1);
+}
+
+/* Reset button styling */
+.reset-btn {
+  padding: 5px 10px;
+  background-color: transparent;
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  margin-left: 10px;
+  transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+  background-color: var(--hover-bg-color);
+  color: var(--accent-1);
+  border-color: var(--accent-1);
+}
+
+.reset-btn:active {
+  transform: scale(0.95);
+}
+
+/* ==================== DOCKVIEW HEADER ACTION BUTTONS ==================== */
+.dv-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.dv-action-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.dv-action-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--primary-color);
+  opacity: 1;
+}
+
+.dv-action-btn.dv-close-btn:hover {
+  background-color: #e81123;
+  color: white;
+}
+
+/* Light theme adjustments */
+body[data-light-theme="true"] .dv-action-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+body[data-light-theme="true"] .dv-action-btn.dv-close-btn:hover {
+  background-color: #e81123;
+  color: white;
+}
+
+/* Light theme: dv-tabs-and-actions-container */
+body[data-light-theme="true"] .dv-tabs-and-actions-container {
+  background-color: #f3f3f3;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* ==================== HIGHLIGHT.JS LIGHT THEME OVERRIDES ==================== */
+/* Override dark theme colors in light mode */
+body[data-light-theme="true"] .hljs {
+  background: #ffffff;
+  color: #333333;
+}
+
+body[data-light-theme="true"] .hljs-comment,
+body[data-light-theme="true"] .hljs-quote {
+  color: #6a737d;
+  font-style: italic;
+}
+
+body[data-light-theme="true"] .hljs-keyword,
+body[data-light-theme="true"] .hljs-selector-tag,
+body[data-light-theme="true"] .hljs-built_in,
+body[data-light-theme="true"] .hljs-name,
+body[data-light-theme="true"] .hljs-tag {
+  color: #d73a49;
+}
+
+body[data-light-theme="true"] .hljs-string,
+body[data-light-theme="true"] .hljs-title,
+body[data-light-theme="true"] .hljs-section,
+body[data-light-theme="true"] .hljs-attribute,
+body[data-light-theme="true"] .hljs-literal,
+body[data-light-theme="true"] .hljs-template-tag,
+body[data-light-theme="true"] .hljs-template-variable,
+body[data-light-theme="true"] .hljs-type,
+body[data-light-theme="true"] .hljs-addition {
+  color: #032f62;
+}
+
+body[data-light-theme="true"] .hljs-deletion,
+body[data-light-theme="true"] .hljs-selector-attr,
+body[data-light-theme="true"] .hljs-selector-pseudo,
+body[data-light-theme="true"] .hljs-meta {
+  color: #6f42c1;
+}
+
+body[data-light-theme="true"] .hljs-doctag {
+  color: #22863a;
+}
+
+body[data-light-theme="true"] .hljs-title.function_,
+body[data-light-theme="true"] .hljs-function {
+  color: #6f42c1;
+}
+
+body[data-light-theme="true"] .hljs-number,
+body[data-light-theme="true"] .hljs-symbol,
+body[data-light-theme="true"] .hljs-bullet,
+body[data-light-theme="true"] .hljs-link {
+  color: #005cc5;
+}
+
+body[data-light-theme="true"] .hljs-variable,
+body[data-light-theme="true"] .hljs-params {
+  color: #e36209;
+}
+
+/* Assembly-specific light theme */
+body[data-light-theme="true"] .asm-line .line-content .hljs-keyword {
+  color: #0000ff;
+}
+
+body[data-light-theme="true"] .asm-line .line-content .hljs-built_in {
+  color: #795e26;
+}
+
+body[data-light-theme="true"] .asm-line .line-content .hljs-number {
+  color: #098658;
+}
+
+body[data-light-theme="true"] .asm-line .line-content .hljs-comment {
+  color: #008000;
+}

@@ -1,0 +1,131 @@
+body, header .logo, nav a, #themeSwitch, .sidebar, .new-chat-btn, .chat-item, .chat-item-delete, .chat-item-rename, .toggle-sidebar-btn, .icon-button, .quick-tools-panel, .panel-title, .toggle-panel-btn, .panel-tool-btn, .panel-tool-icon, .panel-tool-name, .input-wrapper, .file-upload-btn, .deep-search-button, .send-button, .context-menu-item, .socialsContainer a, .robot-container, .robot-head, .eye, .eye::after, .antenna::after, .robot-mouth, .mouth-line, .logo-text, .message-actions, .action-btn, .message-action-btn, .modal-container, .modal-btn, .modern-toast, .profile-dropdown-item { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* Note: profile-bubble has its own transition defined in mcp.css */
+/* Note: profile-dropdown uses display:none/block, not opacity/visibility */
+
+/* ==================== HOVER EFFECTS ==================== */
+header .logo:hover { transform: scale(1.05) rotate(2deg); }
+nav a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+#themeSwitch:hover { background: rgba(255,255,255,0.25); transform: scale(1.1) rotate(20deg); }
+.new-chat-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); background: rgba(255, 255, 255, 0.3); border-color: rgba(255, 255, 255, 0.5); }
+.chat-item:hover { background: var(--hover-bg-color); transform: translateX(8px); }
+.chat-item:hover .chat-item-delete, .chat-item:hover .chat-item-rename { opacity: 1; }
+.chat-item-delete:hover { background: rgba(239,68,68,0.2); transform: scale(1.2); }
+.chat-item-rename:hover { background: rgba(102,126,234,0.2); transform: scale(1.2); }
+.toggle-sidebar-btn:hover { background: var(--hover-bg-color); border-color: var(--accent-1); transform: scale(1.1); }
+.icon-button:hover { background: var(--hover-bg-color); color: var(--primary-color); transform: scale(1.1); }
+.toggle-panel-btn:hover { background: rgba(255, 255, 255, 0.3); transform: scale(1.1); }
+.panel-tool-btn:hover { transform: translateX(-8px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); border-color: var(--accent-1); background: var(--cyber-gradient); }
+.panel-tool-btn:hover .panel-tool-icon, .panel-tool-btn:hover .panel-tool-name { color: white; }
+.input-wrapper:focus-within { border-color: var(--accent-1); box-shadow: 0 0 0 4px rgba(102,126,234,0.15); transform: translateY(-2px); }
+.file-upload-btn:hover { background: var(--hover-bg-color); color: var(--accent-1); transform: scale(1.1); }
+.deep-search-button:hover:not(:disabled) { transform: scale(1.1); box-shadow: var(--shadow); }
+.send-button:hover:not(:disabled) { transform: scale(1.1) rotate(5deg); box-shadow: var(--shadow); }
+.context-menu-item:hover { background: var(--hover-bg-color); transform: translateX(4px); }
+.socialsContainer a:hover { transform: scale(1.15) rotate(5deg); }
+.message-action-btn:hover { background: var(--hover-bg-color); transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.message-action-btn.copied { background: var(--accent-1); color: white; animation: copySuccess 0.3s; }
+.modal-btn-confirm:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.5); }
+.modal-close-btn:hover { background: rgba(255,255,255,0.25); transform: rotate(90deg); }
+
+/* Profile dropdown item hover */
+.profile-dropdown-item:hover { background: var(--bg-hover); transform: translateX(4px); }
+.profile-dropdown-item.danger:hover { background: rgba(239,68,68,0.1); }
+
+/* ==================== ROBOT HOVER - SMILE & WINK ==================== */
+.robot-container { cursor: pointer; }
+.robot-container:hover { transform: translate(-50%, -50%) scale(1.1); filter: drop-shadow(0 0 20px rgba(102,126,234,0.4)); }
+.robot-container:hover .robot-head { animation: floatFast 1s infinite, wiggle 0.5s; }
+.robot-container:hover .eye:first-child { animation: wink 2s infinite; }
+.robot-container:hover .eye:last-child { animation: blink 3s infinite; }
+.robot-container:hover .eye::after { animation: eyeMoveFast 1.5s infinite; }
+.robot-container:hover .antenna::after { animation: antennaPulseFast 0.5s infinite; }
+.robot-container:hover .robot-mouth { animation: smile 0.5s forwards; border-radius: 0 0 20px 20px; }
+.robot-container:hover .mouth-line { opacity: 0; }
+.robot-container:hover .logo-text { animation: textBounce 0.6s ease-out; transform: translateX(-50%) scale(1.05); }
+
+/* ==================== BASE ANIMATIONS ==================== */
+header { animation: slideDown 0.4s; }
+.sidebar { animation: slideInLeft 0.4s; }
+.welcome-screen { animation: scaleIn 0.5s; }
+.chat-container { animation: fadeIn 0.5s; }
+.message { animation: messageSlideIn 0.4s forwards; }
+.robot-head { animation: float 3s infinite; }
+.eye { animation: blink 4s infinite; }
+.eye::after { animation: eyeMove 3s infinite; }
+.antenna::after { animation: antennaPulse 1.5s infinite; }
+.connection-status .status-dot { animation: pulse 2s infinite; }
+.typing-dot { animation: typingBounce 1.4s infinite; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* ==================== TOAST ANIMATIONS ==================== */
+/* Toast styles are in mcp.css - only animations here */
+.modern-toast.show { animation: toastSlideIn 0.4s cubic-bezier(0.68,-0.55,0.265,1.55); }
+.modern-toast.hiding { animation: toastSlideOut 0.3s ease forwards; }
+
+/* ==================== MODAL STYLES & ANIMATIONS ==================== */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 20000; display: flex; align-items: center; justify-content: center; animation: modalOverlayIn 0.3s ease; }
+.modal-overlay.closing { animation: modalOverlayOut 0.2s ease forwards; }
+.modal-container { background: var(--background-color); border-radius: 20px; box-shadow: 0 25px 80px rgba(0,0,0,0.4); min-width: 360px; max-width: 500px; overflow: hidden; border: 1px solid var(--border-color); animation: modalSlideIn 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+.modal-overlay.closing .modal-container { animation: modalSlideOut 0.2s ease forwards; }
+.modal-header { background: var(--cyber-gradient); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+.modal-header-icon { width: 42px; height: 42px; background: rgba(255,255,255,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+.modal-title { color: white; font-size: 1.15rem; font-weight: 700; margin: 0; }
+.modal-subtitle { color: rgba(255,255,255,0.8); font-size: 0.85rem; margin-top: 0.25rem; }
+.modal-close-btn { background: rgba(255,255,255,0.15); border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; color: white; font-size: 1.2rem; }
+.modal-body { padding: 1.5rem; }
+.modal-input-group { margin-bottom: 1rem; }
+.modal-label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem; }
+.modal-input { width: 100%; padding: 0.85rem 1rem; border: 2px solid var(--border-color); border-radius: 10px; font-size: 1rem; background: var(--card-bg); color: var(--primary-color); }
+.modal-input:focus { outline: none; border-color: var(--accent-1); box-shadow: 0 0 0 3px rgba(102,126,234,0.15); }
+.modal-footer { padding: 1rem 1.5rem; background: var(--card-bg); display: flex; justify-content: flex-end; gap: 0.75rem; border-top: 1px solid var(--border-color); }
+.modal-btn { padding: 0.75rem 1.5rem; border-radius: 10px; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
+.modal-btn-cancel { background: transparent; border: 2px solid var(--border-color); color: var(--primary-color); }
+.modal-btn-confirm { background: var(--cyber-gradient); border: none; color: white; box-shadow: 0 4px 15px rgba(102,126,234,0.4); }
+
+/* ==================== COPY BUTTON ==================== */
+.message-actions { opacity: 0; transition: opacity 0.2s; }
+.message:hover .message-actions { opacity: 1; }
+
+/* ==================== DARK THEME MODAL ==================== */
+[data-theme="dark"] .modal-container { background: #2a2b32; border-color: #4d4d4f; }
+[data-theme="dark"] .modal-input { background: #343541; border-color: #4d4d4f; }
+[data-theme="dark"] .modal-footer { background: #202123; border-color: #4d4d4f; }
+[data-theme="dark"] .modal-btn-cancel { border-color: #4d4d4f; }
+
+/* ==================== ALL KEYFRAMES ==================== */
+@keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes messageSlideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); opacity: 0.6; } 30% { transform: translateY(-12px); opacity: 1; } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+@keyframes floatFast { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+@keyframes wiggle { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-3deg); } 75% { transform: rotate(3deg); } }
+@keyframes blink { 0%, 48%, 52%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.1); } }
+@keyframes wink { 0%, 30%, 60%, 100% { transform: scaleY(1); } 35%, 55% { transform: scaleY(0.1); } }
+@keyframes eyeMove { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(3px, -2px); } 50% { transform: translate(-3px, 2px); } 75% { transform: translate(2px, 3px); } }
+@keyframes eyeMoveFast { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(4px, -2px); } 50% { transform: translate(-4px, 2px); } 75% { transform: translate(2px, 4px); } }
+@keyframes antennaPulse { 0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; } 50% { transform: translateX(-50%) scale(1.3); opacity: 0.7; } }
+@keyframes antennaPulseFast { 0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; } 50% { transform: translateX(-50%) scale(1.4); opacity: 0.6; } }
+@keyframes smile { 0% { height: 6px; border-radius: 4px; } 100% { height: 20px; border-radius: 0 0 20px 20px; } }
+@keyframes textBounce { 0% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.1) translateY(-5px); } 100% { transform: translateX(-50%) scale(1.05); } }
+@keyframes copySuccess { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+@keyframes toastSlideIn { from { opacity: 0; transform: translateX(100px) scale(0.8); } to { opacity: 1; transform: translateX(0) scale(1); } }
+@keyframes toastSlideOut { from { opacity: 1; transform: translateX(0) scale(1); } to { opacity: 0; transform: translateX(100px) scale(0.8); } }
+@keyframes modalOverlayIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalOverlayOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes modalSlideIn { from { opacity: 0; transform: translateY(-50px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes modalSlideOut { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(-30px) scale(0.95); } }
+
+/* ==================== MOBILE RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .message-actions { opacity: 1; }
+  .modal-container { min-width: 90%; margin: 1rem; }
+}
+
+/* ==================== REDUCED MOTION ==================== */
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }

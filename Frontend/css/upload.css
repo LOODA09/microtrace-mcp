@@ -1,0 +1,296 @@
+/* ============================================================
+   UPLOAD & PROJECTS PAGE STYLES
+   ============================================================ */
+
+/* Main Content Layout */
+.upload-section,
+.project-list-section {
+  margin-bottom: 2rem;
+}
+
+.upload-section h2,
+.project-list-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.upload-container {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.form-group select,
+.form-group input[type="text"],
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+  color: var(--primary-color);
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.form-group select:focus,
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus {
+  outline: none;
+  border-color: var(--accent-1);
+  background: var(--card-bg);
+}
+
+.form-group input[type="file"] {
+  display: block;
+  padding: 0.5rem;
+}
+
+/* File Upload Styling */
+.upload-label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 2px dashed var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  justify-content: center;
+}
+
+.upload-label:hover {
+  border-color: var(--accent-1);
+  background: var(--card-bg);
+  transform: translateY(-2px);
+}
+
+.upload-icon {
+  font-size: 2rem;
+}
+
+.upload-text {
+  font-size: 1rem;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.file-info {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  padding: 0.5rem;
+  background: var(--bg-color);
+  border-radius: 6px;
+}
+
+/* Custom Flash Address */
+#customFlashAddress {
+  display: none;
+  margin-top: 0.5rem;
+}
+
+#customFlashAddress.shown {
+  display: block;
+}
+
+/* Buttons */
+button,
+.analyze-btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent-1);
+  color: white;
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+button:hover:not(:disabled),
+.analyze-btn:hover:not(:disabled) {
+  background: var(--accent-2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+button:disabled,
+.analyze-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Project List */
+.project-list {
+  margin-top: 0;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+.project-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.project-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.project-item:hover {
+  background: var(--hover-bg-color);
+  transform: translateX(4px);
+}
+
+.project-item.active {
+  border-left: 4px solid var(--accent-1);
+  background: var(--hover-bg-color);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
+}
+
+/* Project Info */
+.project-info {
+  flex: 1;
+}
+
+.project-info h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.project-info p {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: left;
+  line-height: 1.5;
+}
+
+/* Project Actions */
+.project-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.project-actions button {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.project-actions .btn-activate {
+  background: var(--accent-1);
+  color: white;
+  border: none;
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
+}
+
+.project-actions .btn-activate:hover {
+  background: var(--accent-2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4);
+}
+
+.project-actions .btn-delete {
+  background: transparent;
+  color: #ff4d4d;
+  border: 1px solid #ff4d4d;
+  box-shadow: none;
+}
+
+.project-actions .btn-delete:hover {
+  background: #ff4d4d;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 77, 77, 0.3);
+}
+
+/* Light Theme Adjustments */
+body[data-light-theme="true"] .upload-label {
+  background: #f8f9fa;
+}
+
+body[data-light-theme="true"] .upload-label:hover {
+  background: white;
+}
+
+body[data-light-theme="true"] .file-info {
+  background: #f8f9fa;
+}
+
+body[data-light-theme="true"] .form-group select,
+body[data-light-theme="true"] .form-group input[type="text"] {
+  background: white;
+  border-color: #dee2e6;
+}
+
+body[data-light-theme="true"] .form-group select:focus,
+body[data-light-theme="true"] .form-group input[type="text"]:focus {
+  background: white;
+  border-color: var(--accent-1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .project-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .project-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .upload-container {
+    padding: 1.5rem;
+  }
+}
